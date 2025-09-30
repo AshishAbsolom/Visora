@@ -1,0 +1,216 @@
+/* Browser Compatibility Fixes */
+
+/* Ensure consistent box-sizing across all browsers */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Chrome-specific fixes */
+@supports (-webkit-appearance: none) {
+  /* Fix Chrome backdrop-filter rendering issues */
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+  }
+  
+  /* Fix Chrome gradient text rendering */
+  .gradient-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Fix Chrome transform rendering */
+  .transform {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Fix for Safari backdrop-filter issues */
+@supports (-webkit-backdrop-filter: blur(1px)) {
+  .backdrop-blur-sm { -webkit-backdrop-filter: blur(4px); }
+  .backdrop-blur-md { -webkit-backdrop-filter: blur(8px); }
+  .backdrop-blur-lg { -webkit-backdrop-filter: blur(12px); }
+  .backdrop-blur-xl { -webkit-backdrop-filter: blur(16px); }
+  .backdrop-blur-2xl { -webkit-backdrop-filter: blur(24px); }
+  .backdrop-blur-3xl { -webkit-backdrop-filter: blur(40px); }
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(1px)) {
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+/* Fix for Firefox gradient text rendering */
+@-moz-document url-prefix() {
+  .gradient-text {
+    background: none !important;
+    color: hsl(250, 70%, 60%) !important;
+  }
+  
+  /* Fix Firefox backdrop-filter issues */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  /* Fix Firefox transform issues */
+  .transform {
+    transform: translateZ(0);
+  }
+  
+  /* Fix Firefox flexbox issues */
+  .flex {
+    display: -moz-box;
+    display: -moz-flex;
+    display: flex;
+  }
+  
+  /* Fix Firefox grid issues */
+  .grid {
+    display: -moz-grid;
+    display: grid;
+  }
+  
+  /* Fix Firefox text rendering */
+  body {
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Fix for older browsers that don't support CSS Grid */
+@supports not (display: grid) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .grid > * {
+    flex: 1 1 auto;
+  }
+}
+
+/* Ensure smooth scrolling works in all browsers */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix for iOS Safari viewport issues */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Fix for Edge/IE transform issues */
+@supports (-ms-ime-align: auto) {
+  .transform {
+    -ms-transform: none;
+  }
+}
+
+/* Ensure consistent focus styles across browsers */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid hsl(250, 70%, 60%);
+  outline-offset: 2px;
+}
+
+/* Fix for Chrome/Safari animation performance */
+.animate-float,
+.animate-hero-pop,
+.animate-rise {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Ultra-wide display optimizations */
+@media (min-width: 2560px) {
+  .container {
+    max-width: 2400px;
+  }
+  
+  .max-w-6xl {
+    max-width: 1400px;
+  }
+  
+  .max-w-7xl {
+    max-width: 1600px;
+  }
+}
+
+/* Mobile-first responsive improvements */
+@media (max-width: 640px) {
+  .text-3xl { font-size: 1.875rem; }
+  .text-4xl { font-size: 2.25rem; }
+  .text-5xl { font-size: 3rem; }
+  .text-6xl { font-size: 3.75rem; }
+  .text-7xl { font-size: 4.5rem; }
+  .text-8xl { font-size: 6rem; }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .blur-3xl {
+    filter: blur(64px);
+  }
+}
+
+/* Chrome viewport and layout fixes */
+@supports (-webkit-appearance: none) {
+  /* Fix Chrome container sizing issues */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Fix Chrome flexbox issues */
+  .flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  /* Fix Chrome grid issues */
+  .grid {
+    display: -ms-grid;
+    display: grid;
+  }
+  
+  /* Fix Chrome text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Fix Chrome shadow rendering */
+  .shadow-card {
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+    -webkit-box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+  }
+  
+  .shadow-float {
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+    -webkit-box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+  }
+}
